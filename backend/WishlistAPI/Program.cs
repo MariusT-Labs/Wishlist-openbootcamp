@@ -17,6 +17,17 @@ var connectionString = builder.Configuration.GetConnectionString(CONNECTIONNAME)
 // Add DbContext
 builder.Services.AddDbContext<WishlistDBContext>(options => options.UseNpgsql(connectionString));
 
+// CORS Configuration
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "CorsPolicy", builder =>
+    {
+        builder.AllowAnyOrigin();
+        builder.AllowAnyMethod();
+        builder.AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
